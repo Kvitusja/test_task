@@ -1,13 +1,14 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:intl_phone_field/country_picker_dialog.dart';
-import 'package:intl_phone_field/intl_phone_field.dart';
+import 'package:test_task/phone_input_textfield_widget.dart';
+import 'country_code_field_widget.dart';
+import 'elevated_button_widget.dart';
 
 class MainScreenWidget extends StatelessWidget {
   const MainScreenWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController newController = TextEditingController();
     return Scaffold(
         backgroundColor: const Color.fromARGB(255, 144, 172, 252),
         appBar: AppBar(
@@ -36,35 +37,22 @@ class MainScreenWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(left: 16.0),
+                    padding: const EdgeInsets.only(left: 5.0),
                     child: Container(
                       height: 50,
-                      width: 92,
+                      width: 116,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(16),
                         color: const Color.fromARGB(255, 183, 200, 253),
                       ),
-                      child: Center(
-                        child: IntlPhoneField(
-                          pickerDialogStyle: PickerDialogStyle(
-                            backgroundColor: const Color.fromARGB(255, 183, 200, 253),
-                            searchFieldInputDecoration: InputDecoration(
-
-                              border: OutlineInputBorder(borderRadius: BorderRadius.circular(12),),
-                            ),
-                          ),
-                          disableLengthCheck: true,
-                          initialCountryCode: 'US',
-                          decoration: const InputDecoration(border: InputBorder.none),
-                        ),
-                      ),
+                      child: const CountryCodeFieldWidget(),
                     ),
                   ),
                   const SizedBox(
-                    width: 12,
+                    width: 5,
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(right: 16.0),
+                    padding: const EdgeInsets.only(right: 5.0),
                     child: Container(
                       width: 250,
                       height: 50,
@@ -72,17 +60,10 @@ class MainScreenWidget extends StatelessWidget {
                         borderRadius: BorderRadius.circular(16),
                         color: const Color.fromARGB(255, 183, 200, 253),
                       ),
-                      child: const Padding(
-                        padding: EdgeInsets.all(4.0),
+                      child: Padding(
+                        padding: const EdgeInsets.all(4.0),
                         child: Center(
-                          child: TextField(
-                            keyboardType: TextInputType.phone,
-                            decoration: InputDecoration(
-                              hintText: '(123)123-1234',
-                              hintStyle: TextStyle(color: Colors.black54),
-                              border: InputBorder.none,
-                            ),
-                          ),
+                          child: PhoneInputTextFieldWidget(newController: newController),
                         ),
                       ),
                     ),
@@ -102,21 +83,7 @@ class MainScreenWidget extends StatelessWidget {
                     child: Container(
                       height: 50,
                       width: 50,
-                      child: ElevatedButton(
-                        style: ButtonStyle(
-                          shape:
-                              MaterialStateProperty.all<RoundedRectangleBorder>(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(16),
-                            ),
-                          ),
-                          backgroundColor: MaterialStateProperty.all(
-                            const Color.fromARGB(255, 183, 200, 253),
-                          ),
-                        ),
-                        onPressed: null,
-                        child: Icon(Icons.arrow_forward),
-                      ),
+                      child: ElevatedButtonWidget(newController: newController,),
                     ),
                   ),
                 )),
